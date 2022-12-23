@@ -1,0 +1,223 @@
+\documentclass[12pt]{article}
+
+% PACKAGES
+
+\usepackage[
+top=2.50cm,
+bottom=2.50cm,
+left=2cm,
+right=2cm,
+marginparsep=0pt,
+marginparwidth=0pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{dirtree}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{ulem}
+\usepackage{verbatim}
+\usepackage{contour}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{inputenc}
+\usepackage[utf8]{inputenx}
+\usepackage[unicode]{hyperref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{booktabs}
+\usepackage{bookmark}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tocloft}
+\usepackage{tikz}
+
+% MACROS & DEFS
+
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\round}[1]{\left\lfloor #1 \right\rceil}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+
+\DeclareRobustCommand{\ul}[1]{%
+	\uline{\phantom{#1}}%
+	\llap{\contour{white}{#1}}%
+}
+
+\renewcommand{\ULdepth}{1.8pt}
+\contourlength{0.8pt}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.75em}
+
+\definecolor{codegreen}{RGB}{0,135,0}
+\definecolor{codegray}{RGB}{135,135,135}
+\definecolor{codemagenta}{RGB}{215,0,135}
+\definecolor{codepurple}{RGB}{135,0,175}
+\definecolor{backcolour}{RGB}{238,238,238}
+
+\def\cpp{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
+
+% PACKAGE CONFIG
+
+\graphicspath{ {./images/} }
+
+\lstdefinestyle{code}{
+	basicstyle=\ttfamily\small,
+	commentstyle=\color{codegray}\itshape,
+	keywordstyle=\color{codepurple},
+	stringstyle=\color{codegreen},
+	aboveskip=25pt,
+    belowskip=10pt,
+	breaklines=true,
+	numbers=none,
+	frame=tb,
+	framesep=5pt,
+	keepspaces=true,
+	showspaces=false,
+	showstringspaces=false,
+	breakatwhitespace=false,
+	tabsize=2,
+	showtabs=false,
+}
+
+\lstset{style=code}
+
+% Set dots for table of contents
+\renewcommand{\cftdot}{.}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% Set theorem
+\newtheorem*{definition}{Definition}
+
+% HEADER & FOOTER
+
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{J. Scerri}
+\chead{CPS2004 --- Assignment}
+\rhead{\thepage}
+
+% TITLE
+
+\title{CPS2004 --- Object Oriented Programming\\
+\vspace{1em}\textbf{Assignment}}
+
+\date{\today}
+
+\author {{\textbf{Juan Scerri}}\\
+B.Sc. (Hons)(Melit.) Computing Science and Mathematics (Second Year)}
+
+\begin{document}
+
+%----------------------------------
+%	TITLE PAGE
+%----------------------------------
+
+\maketitle % Print the title page
+
+\thispagestyle{empty} % Suppress headers and footers on the title page
+
+%----------------------------------
+
+\tableofcontents
+
+\clearpage
+
+\listoffigures
+
+\lstlistoflistings
+
+\clearpage
+
+\section{Plagiarism Declaration}
+
+Plagiarism is defined as \textit{``the unacknowledged use, as
+one's own, of work of another person, whether or not such work
+has been published, and as may be further elaborated in Faculty
+or University guidelines''} (\ul{University Assessment
+Regulations}, 2009, Regulation 39 (b)(i), University of Malta).
+
+I, the undersigned, declare that the report submitted is my
+work, except where acknowledged and referenced. I understand
+that the penalties for committing a breach of the regulations
+include loss of marks; cancellation of examination results;
+enforced suspension of studies; or expulsion from the degree
+programme.
+
+Work submitted without this signed declaration will not be
+corrected, and will be given zero marks.
+
+\vfill
+
+\begin{minipage}[t]{0.3\textwidth}
+\ul{Juan Scerri} \medskip
+
+\textbf{Student's full name} \medskip
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.3\textwidth}
+\ul{CPS2004} \medskip
+
+\textbf{Study-unit code} \medskip
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.3\textwidth}
+\ul{{\today}} \medskip
+
+\textbf{Date of submission} \medskip
+\end{minipage}
+
+\vspace{2cm}
+
+\textbf{Title of submitted work:} \ul{Object Oriented
+Programming Assignment}
+
+\vspace{2cm}
+
+\textbf{Student's signature} \medskip
+
+\underline{\includegraphics[height=2cm]{sig}} \medskip
+
+% Specifically:
+% - explain language choice 
+% - explain the user interface and how to interact with the game
+% - mention the design (with uml) and design choices
+% - important technical aspects which are crucial and
+%   fundamental to the whole program
+% - approach to testing and ensuring proper functionality of the
+%   program
+% - limitations and possible improvements
+
+\section{Village War Game}
+
+\subsection{Language Choice}
+\subsection{User Guide}
+\subsection{Design}
+\subsection{Technical Aspects}
+\subsection{Testing}
+\subsection{Limitations \& Improvements}
+
+\section{Minesweeper}
+
+\subsection{Language Choice}
+
+\cpp{} was chosen for Minesweeper because it has a fixed board
+size of $16 \times 16$. This means that it is possible to stack
+allocate every object removing the need for dynamic memory
+allocation. This is facilitated by \texttt{std::array} from the
+Standard Template Library (STL) which allows for the creation of
+fixed size arrays on the stack.
+
+\subsection{User Guide}
+\subsection{Design}
+\subsection{Technical Aspects}
+\subsection{Testing}
+\subsection{Limitations \& Improvements}
+
+\end{document}
