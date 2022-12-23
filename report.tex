@@ -64,7 +64,7 @@ marginparwidth=0pt]{geometry}
 
 % PACKAGE CONFIG
 
-\graphicspath{ {./images/} }
+% \graphicspath{ {./images/} }
 
 \lstdefinestyle{code}{
 	basicstyle=\ttfamily\small,
@@ -182,7 +182,7 @@ Programming Assignment}
 
 \textbf{Student's signature} \medskip
 
-\underline{\includegraphics[height=2cm]{sig}} \medskip
+\underline{\includegraphics[height=2cm]{./images/sig.png}} \medskip
 
 % Specifically:
 % - explain language choice 
@@ -215,6 +215,47 @@ Standard Template Library (STL) which allows for the creation of
 fixed size arrays on the stack.
 
 \subsection{User Guide}
+
+\subsubsection{Download, Compiling \& Running}
+
+\begin{enumerate}
+\item
+    Clone the repository.
+\begin{lstlisting}
+$ git clone https://github.com/JuanScerriE/minesweeper
+\end{lstlisting}
+
+\item
+    Compile the tests and the game.
+
+    \textbf{Note:} Make sure that \texttt{gtest} and
+    \texttt{ncurses} are installed for the tests and the game,
+    respectively.
+\begin{lstlisting}
+$ cd minesweeper ; ./compile.sh
+\end{lstlisting}
+
+\item
+    Run the tests.
+
+    \textbf{Note:} Some tests might fail. This is because the
+    sure that \texttt{gtest} and \texttt{ncurses} are installed
+    for the tests and the game,
+    respectively.
+\begin{lstlisting}
+minesweeper $ ./tests.sh
+\end{lstlisting}
+
+\item
+    Run the game.
+\begin{lstlisting}
+minesweeper $ ./run.sh
+\end{lstlisting}
+
+\end{enumerate}
+
+\subsubsection{Playing}
+
 \subsection{Design}
 \subsection{Technical Aspects}
 \subsection{Testing}
