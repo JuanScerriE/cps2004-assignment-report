@@ -9,4 +9,5 @@
 *.lof
 *.run.xml
 *.toc
+*.dvi
 *.synctex.gz

@@ -1,0 +1,43 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Minesweeper {
+    + Minesweeper()
+    + ~Minesweeper()
+
+    + void run()
+
+    - void setup()
+    - void game_loop()
+
+    - void handle_movement(char input)
+    - int to_horizontal_raw(int n)
+
+    - void draw_parent_win()
+    - void draw_board_win()
+    - void draw_board_subwin()
+    - void init_draw_status_win()
+    - void draw_status_win()
+    - void refresh_parent_win()
+    - void refresh_board_win()
+    - void refresh_board_subwin(int x, int y)
+    - void refresh_status_win()
+
+    - Board m_board
+
+    - WINDOW* m_parent_win
+    - WINDOW* m_board_win
+    - WINDOW* m_board_subwin
+    - WINDOW* m_status_win
+
+    - int m_raw_x 
+    - int m_raw_y
+    - int m_x
+    - int m_y
+
+    - bool m_populate_board
+
+    - std::string m_end_message
+}
+
+@enduml

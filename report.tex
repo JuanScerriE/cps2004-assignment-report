@@ -35,6 +35,7 @@ marginparwidth=0pt]{geometry}
 \usepackage{xcolor}
 \usepackage{tocloft}
 \usepackage{tikz}
+\usepackage{subfiles}
 
 % MACROS & DEFS
 
@@ -197,7 +198,39 @@ Programming Assignment}
 \section{Village War Game}
 
 \subsection{Language Choice}
+
+Java was chosen for the Village War Game because it has more
+complicated entity lifetimes. Programming the game in \cpp{}
+would have required dealing with pointers to manage lifetimes.
+Obviously, dealing with pointers brings the possibility of
+memory leaks. Since Java has a Garbage Collector (GC) there is
+no need for manual deallocation of memory.
+
 \subsection{User Guide}
+
+\subsubsection{Download, Compiling \& Running}
+
+\begin{enumerate}
+\item
+    Clone the repository.
+\begin{lstlisting}
+$ git clone https://github.com/JuanScerriE/village-war-game
+\end{lstlisting}
+
+\item
+    Compile the game.
+\begin{lstlisting}
+$ cd village-war-game ; ./compile.sh
+\end{lstlisting}
+
+\item
+    Run the game.
+\begin{lstlisting}
+village-war-game $ ./run.sh
+\end{lstlisting}
+
+\end{enumerate}
+
 \subsection{Design}
 \subsection{Technical Aspects}
 \subsection{Testing}
@@ -239,9 +272,8 @@ $ cd minesweeper ; ./compile.sh
     Run the tests.
 
     \textbf{Note:} Some tests might fail. This is because the
-    sure that \texttt{gtest} and \texttt{ncurses} are installed
-    for the tests and the game,
-    respectively.
+    implentation of \texttt{srand} and \texttt{rand} differ
+    between platforms (specifically macOS and Linux).
 \begin{lstlisting}
 minesweeper $ ./tests.sh
 \end{lstlisting}
@@ -256,9 +288,114 @@ minesweeper $ ./run.sh
 
 \subsubsection{Playing}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{./images/playing-minesweeper.png}
+    \caption{Playing Minesweeper}
+    \label{playing-minesweeper}
+\end{figure}
+
+The general guide to playing Minesweeper is described above in
+figure \ref{playing-minesweeper}.
+
+\textbf{Note:} \texttt{vim} motions are used to move the cursor.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{./images/hitting-mine-minesweeper.png}
+    \caption{Hitting a mine}
+    \label{hitting-mine-minesweeper}
+\end{figure}
+
+If the player hits a mine the above message as in figure
+\ref{hitting-mine-minesweeper} will be displayed.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{./images/finishing-minesweeper.png}
+    \caption{Finishing a game of Minesweeper}
+    \label{finishing-minesweeper}
+\end{figure}
+
+If the player manages to clear all the cells without hitting a
+mine the above message as in figure \ref{finishing-minesweeper}
+will be displayed.
+
+Finally, there is an additional \textit{secret} command to
+automatically complete the board without hitting a mine. The
+user needs to press \texttt{W} (\texttt{shift + w}).
+
+\textbf{Note:} This only works if the user has at least revealed
+one cell. This is because the board is populated with all the
+mines after the first reveal to ensure a player never hits a
+mine on his first try.
+
 \subsection{Design}
-\subsection{Technical Aspects}
+
+\begin{center}
+\subfile{minesweeper-uml/minesweeper.latex}
+\end{center}
+
+\begin{center}
+\subfile{minesweeper-uml/board.latex}
+\end{center}
+
+\begin{center}
+\subfile{minesweeper-uml/cell.latex}
+\end{center}
+
+\begin{center}
+\subfile{minesweeper-uml/relations.latex}
+\end{center}
+
+The Minesweeper class contains the user interface code, that
+is it contains all \texttt{ncurses} specific code. The class
+also handles user input.
+
+The Board class contains the majority of the game logic. It is a
+part of the Minesweeper class, that is if a Minesweeper object
+ceases to exist so does the Board object. Further more the
+actual board \texttt{m\_board} is a grid of Cell objects. Also
+the lifetime of the objects is managed by the Board since when
+the board ceases to exist so do the cells.
+
 \subsection{Testing}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{./images/unit-tests-minesweeper.png}
+    \caption{Unit tests for Minesweeper (on macOS Ventura 13.1)}
+\end{figure}
+
+Black-box Testing and Unit Testing were used to test the
+application. For unit testing \texttt{gtest} is required.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=14cm]{./images/leaks-minesweeper.png}
+    \caption{Testing for memory leaks (on macOS Ventura 13.1)}
+\end{figure}
+
+Furthermore, to test for memory leaks, on macOS, \texttt{leaks}
+was used and, on Linux, \texttt{valgrind} was used.
+\texttt{leaks} reported not memory leaks whilst
+\texttt{valgrind} reported leaks from \texttt{ncureses}.
+
 \subsection{Limitations \& Improvements}
+
+\ul{Limitation:} The unit tests are not cross-platform; four of
+the unit tests fail on Linux. This is mostly due to differing
+implementations of \texttt{srand()} and \texttt{rand()} on
+different platforms.
+
+\ul{Solution:} Create a custom random number generated. This
+guarantees the same result across different platforms.
+
+\ul{Limitation:} The \texttt{ncurses} library leaks memory on
+Linux whilst on macOS it does not.
+
+\ul{Solution:} This seems to be intended behaviour from
+\texttt{ncurses}. Read the man page at
+\url{https://man7.org/linux/man-pages/man3/curs_memleaks.3x.html}
 
 \end{document}

@@ -1,0 +1,41 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+json State {
+    "MINE": "-1",
+    "ZERO": "0",
+    "ONE": "1",
+    "TWO": "2",
+    "THREE": "3",
+    "FOUR": "4",
+    "FIVE": "5",
+    "SIX": "6",
+    "SEVEN": "7",
+    "EIGHT": "8"
+}
+
+class Cell {
+    + Cell()
+    + ~Cell()
+
+    + bool is_hidden() const
+    + void hide()
+    + void unhide()
+
+    + State get_state() const
+    + void inc_state()
+
+    + bool is_zero() const
+    + bool is_mine() const
+
+    + void make_zero()
+    + void make_mine()
+
+    + std::string to_string() const
+    + std::string to_curs_string() const
+
+    - bool m_hidden
+    - State m_state
+}
+
+@enduml

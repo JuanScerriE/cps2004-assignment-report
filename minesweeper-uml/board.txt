@@ -1,0 +1,30 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Board {
+    + Board() 
+    + ~Board()
+
+    + void populate_board(int starting_r, int starting_c)
+    + void reveal(int r, int c)
+    + void reset()
+    + void secret_autocomplete()
+
+    + bool has_hit_mine() const
+    + bool has_cleared_board() const
+
+    + std::string to_string() const
+    + std::string to_curs_string() const
+    
+    - void calc_mine_counts(int r, int c)
+
+    + static constexpr int sc_board_size
+    + static constexpr int sc_num_of_mines
+
+    - std::array<std::array<Cell, sc_board_size>, sc_board_size> m_board
+
+    - bool m_has_hit_mine
+    - int m_num_hidden_cells
+}
+
+@enduml

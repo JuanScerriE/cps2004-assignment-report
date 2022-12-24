@@ -1,0 +1,9 @@
+@startuml
+left to right direction
+
+hide members
+
+Minesweeper *-- Board
+Board *-- Cell
+
+@enduml
