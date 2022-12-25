@@ -22,11 +22,9 @@ marginparwidth=0pt]{geometry}
 \usepackage{verbatim}
 \usepackage{contour}
 \usepackage{graphicx}
-\usepackage{svg}
 \usepackage{xcolor}
 \usepackage[T1]{fontenc}
 \usepackage{inputenc}
-\usepackage[utf8]{inputenx}
 \usepackage[unicode]{hyperref}
 \usepackage[shortlabels]{enumitem}
 \usepackage{booktabs}
@@ -229,6 +227,54 @@ $ cd village-war-game ; ./compile.sh
 village-war-game $ ./run.sh
 \end{lstlisting}
 
+\end{enumerate}
+
+\subsubsection{Playing}
+
+% add image of specifying human players
+
+Starting the game the player is asked to input the number of
+human players.
+
+% add image of specifying AI players
+
+Then the player is aksed to input the number of AI players.
+
+% add image of the menu
+
+The game loop will start. Each human player will be prompted
+with a menu of options. There are two categories: Info and
+Actions. The Info category contains options which provide the
+player with information about his own village, enemy villages,
+armies and costs. The Actions category contains options which
+affect the state of the game such as building, training and
+attacking. Finally, the player can decided to pass the turn to
+the next player.
+
+Each player by default at the start will have 50 food, metal and
+mana. The player can then use these resource to build or upgrade
+buildings and train troops.
+
+The following types of building can be built:
+
+\begin{enumerate}
+    \item Academy (to generate wizards)
+    \item Foundation (to generate scouts)
+    \item Arena (to generate brawlers)
+    \item Farm (to generate food)
+    \item Mine (to generate metal)
+    \item Mana Tower (to generate mana)
+\end{enumerate}
+
+As described in the above list there are three types of troops:
+
+\begin{enumerate}
+    \item Wizard (high attack, low health, medium speed, low
+        carrying capacity)
+    \item Brawler (high attack, high health, slow speed, medium
+        carrying capacity)
+    \item Scout (low attack, medium health, high speed, high
+        carrying capacity)
 \end{enumerate}
 
 \subsection{Design}
