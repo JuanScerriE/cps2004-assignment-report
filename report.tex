@@ -231,29 +231,49 @@ village-war-game $ ./run.sh
 
 \subsubsection{Playing}
 
-% add image of specifying human players
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{./images/human-players-village-war-game.png}
+    \caption{Picking the number of human players}
+    \label{human-players-village-war-game}
+\end{figure}
 
 Starting the game the player is asked to input the number of
 human players.
 
-% add image of specifying AI players
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{./images/ai-players-village-war-game.png}
+    \caption{Picking the number of AI players}
+    \label{ai-players-village-war-game}
+\end{figure}
 
 Then the player is aksed to input the number of AI players.
 
-% add image of the menu
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{./images/player-menu-village-war-game.png}
+    \caption{Menu for the human players}
+    \label{player-menu-village-war-game}
+\end{figure}
 
 The game loop will start. Each human player will be prompted
-with a menu of options. There are two categories: Info and
-Actions. The Info category contains options which provide the
-player with information about his own village, enemy villages,
-armies and costs. The Actions category contains options which
-affect the state of the game such as building, training and
-attacking. Finally, the player can decided to pass the turn to
-the next player.
+with a menu of options. There are two categories: \textbf{Info}
+and \textbf{Actions}.
 
-Each player by default at the start will have 50 food, metal and
-mana. The player can then use these resource to build or upgrade
-buildings and train troops.
+The \textbf{Info} category contains options which provide the
+player with information about his own village, enemy villages,
+armies and costs. Every option in the \textbf{Info} category is
+self--explanatory.
+
+The \textbf{Actions} category contains options which affect the
+state of the game such as \textit{building}, \textit{training}
+and \textit{attacking}. Finally, the player can decided to pass
+the turn to the next player.
+
+All players by default will start with $50$ ``food'', ``metal''
+and ``mana''. The player can use these resources to build
+or upgrade buildings and train troops.
 
 The following types of building can be built:
 
@@ -273,11 +293,117 @@ As described in the above list there are three types of troops:
         carrying capacity)
     \item Brawler (high attack, high health, slow speed, medium
         carrying capacity)
-    \item Scout (low attack, medium health, high speed, high
+    \item Scout (medium attack, medium health, high speed, high
         carrying capacity)
 \end{enumerate}
 
+\subsubsection*{\ul{Building}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{./images/building-village-war-game.png}
+    \caption{Building an Academy in the player's village}
+    \label{building-village-war-game}
+\end{figure}
+
+As depicted above in figure \ref{building-village-war-game}, the
+player is prompted with the different costs of the different
+buildings. If the player does not have enough resources for
+building he/she is notified.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{./images/buildings-info-village-war-game.png}
+    \caption{Info about buildings in the player's village}
+    \label{buildings-info-village-war-game}
+\end{figure}
+
+As shown in figure \ref{buildings-info-village-war-game}, the
+buildings can have different levels of productivity. The initial
+level of productivity for all buildings is $1$.
+
+\subsubsection*{\ul{Upgrading}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{./images/upgrading-village-war-game.png}
+    \caption{Upgrading an Academy in the player's village}
+    \label{buildings-info-village-war-game}
+\end{figure}
+
+Upgrading the building increases the building's level of
+productivity. This has the effect of generating more resources
+or troops per round.  Similarly, if the player does not have
+enough resources for upgrading he/she is notified. 
+
+Additionally, the building which is upgraded first is the oldest
+building.
+
+\subsubsection*{\ul{Training}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{./images/training-village-war-game.png}
+    \caption{Training Wizards in the player's village}
+    \label{buildings-info-village-war-game}
+\end{figure}
+
+Training troops increases the overall stats of the chosen
+troops. Similarly if the player does not have enough resources
+or troops he/she is notified.
+
+Additionally, the training scheme is the same as for buildings
+i.e. the oldest troops are trained first, and each troop has an
+initial level of $1$ and a maximum level of $3$.
+
+\subsubsection*{\ul{Attacking}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{./images/attacking-village-war-game.png}
+    \caption{Attacking another village with Wizards in the player's village}
+    \label{attacking-village-war-game}
+\end{figure}
+
+To attack another village the player needs to pick a enemy
+village to attack. Then the player must specify the the
+composition of the army.
+
+Again if the player does not have enough troops he/she is
+notified.
+
+The troops will be moved from the village station into the army.
+This means that the village will have less defensive power
+making it more vulnerable to attack.
+
+Additionally, when the army arrives at it destination the player
+will be notified of whether the attack was successful or
+unsuccessful.
+
+\subsubsection*{\ul{Incorrect Player Input}}
+
+In all instances where the player input is unexcepted or
+incorrect, the player is notified. All error messages are
+handled in the \texttt{HumanPlayer} class. 
+
+Moreover, error handling was performed by returning a
+\texttt{Status} enum which contains a number of possible errors
+which the program might encounter.
+
+\textbf{Note:} Exceptions were avoided at all costs as they
+obscure control flow. Moreover, most errors do not arrise
+because of exceptional circumstances. Exceptions were handled
+only when thrown from the standard library.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{./images/armies-info-village-war-game.png}
+    \caption{Viewing an army marching towards an enemy village}
+    \label{attacking-village-war-game}
+\end{figure}
+
 \subsection{Design}
+
 \subsection{Technical Aspects}
 \subsection{Testing}
 \subsection{Limitations \& Improvements}
