@@ -1,0 +1,78 @@
+@startuml
+
+top to bottom direction
+skinparam linetype ortho
+
+class AIPlayer
+class Academy
+class Arena
+class Army
+class Brawler
+class Building
+class CategoryList<T>
+class Dimensions
+class Farm
+class Foundation
+class Game
+class HumanPlayer
+class Main
+class ManaTower
+class Map
+class Mine
+class Player
+class Point
+class ResourceBuilding
+class ResourceCollection
+class Scout
+class Station
+enum Status << enumeration >>
+class Tick
+class Troop
+class TroopBuilding
+class TroopCollection
+class Village
+class Wizard
+
+hide members
+
+AIPlayer            -[#000082,plain]-^  Player             
+AIPlayer            *-[#595959,plain]->  Tick               
+Academy             *-[#595959,plain]->  ResourceCollection 
+Academy             -[#000082,plain]-^  TroopBuilding      
+Arena               *-[#595959,plain]->  ResourceCollection 
+Arena               -[#000082,plain]-^  TroopBuilding      
+Army                *-[#595959,plain]->  Point              
+Army                *-[#595959,plain]->  ResourceCollection 
+Army                *-[#595959,plain]->  TroopCollection    
+Army                *-[#595959,plain]->  Village            
+Brawler             -[#000082,plain]-^  Troop              
+Farm                -[#000082,plain]-^  ResourceBuilding   
+Farm                *-[#595959,plain]->  ResourceCollection 
+Foundation          *-[#595959,plain]->  ResourceCollection 
+Foundation          -[#000082,plain]-^  TroopBuilding      
+Game                *-[#595959,plain]->  Map                
+Game                *-[#595959,plain]->  Tick               
+HumanPlayer         -[#000082,plain]-^  Player             
+ManaTower           -[#000082,plain]-^  ResourceBuilding   
+ManaTower           *-[#595959,plain]->  ResourceCollection 
+Map                 *-[#595959,plain]->  Army               
+Map                 *-[#595959,plain]->  Dimensions         
+Map                 *-[#595959,plain]->  Village            
+Mine                -[#000082,plain]-^  ResourceBuilding   
+Mine                *-[#595959,plain]->  ResourceCollection 
+ResourceBuilding    -[#000082,plain]-^  Building           
+Scout               -[#000082,plain]-^  Troop              
+Station             *-[#595959,plain]->  TroopCollection    
+TroopBuilding       -[#000082,plain]-^  Building           
+TroopCollection     *-[#595959,plain]->  CategoryList       
+TroopCollection     *-[#595959,plain]->  Troop              
+Village             *-[#595959,plain]->  Army               
+Village             *-[#595959,plain]->  CategoryList       
+Village             *-[#595959,plain]->  Player             
+Village             *-[#595959,plain]->  Point              
+Village             *-[#595959,plain]->  ResourceBuilding   
+Village             *-[#595959,plain]->  ResourceCollection 
+Village             *-[#595959,plain]->  Station            
+Village             *-[#595959,plain]->  TroopBuilding      
+Wizard              -[#000082,plain]-^  Troop              
+@enduml

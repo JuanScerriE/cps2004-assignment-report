@@ -3,7 +3,7 @@ left to right direction
 
 hide members
 
-Minesweeper *-- Board
-Board *-- Cell
+Minesweeper *-[#595959,plain]-> Board
+Board *-[#595959,plain]-> Cell
 
 @enduml
