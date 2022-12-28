@@ -679,6 +679,13 @@ army again.
 
 \subsection{Testing}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=17cm]{./images/invalid-user-input-village-war-game.png}
+    \caption{Demonstrating invalid option (out--of--bounds) and
+    failure to parse repectively}
+\end{figure}
+
 So, there are three types of failures which our application has
 to cater for:
 
@@ -690,15 +697,21 @@ to cater for:
     \item Failure due to insufficient resources or troops.
 \end{enumerate}
 
-% add images for all three types of errors
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=17cm]{./images/not-enough-resources-village-war-game.png}
+    \caption{Demonstrating ``not enough'' resources failure}
+\end{figure}
 
 Each input was manually tested to ensure that it is not possible
 to plunge the game into an invalid where behaviour is not
 properly defined.
 
-
-% along with a image demonstrating the behaviour to make sure
-% that certain features are working
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=17cm]{./images/testing-army-defeat-village-war-game.png}
+    \caption{Demonstration of a army defeat notification being manually tested}
+\end{figure}
 
 Additionally, the game was further manually tested in a form of
 white-box testing to ensure that the game behaviour is as
