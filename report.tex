@@ -129,11 +129,7 @@ B.Sc. (Hons)(Melit.) Computing Science and Mathematics (Second Year)}
 
 \tableofcontents
 
-\clearpage
-
 \listoffigures
-
-\lstlistoflistings
 
 \clearpage
 
@@ -196,16 +192,15 @@ Programming Assignment}
 %   program
 % - limitations and possible improvements
 
+\clearpage
+
 \section{Village War Game}
 
 \subsection{Language Choice}
 
-Java was chosen for the Village War Game because it has more
-complicated entity lifetimes. Programming the game in \cpp{}
-would have required dealing with pointers to manage lifetimes.
-Obviously, dealing with pointers brings the possibility of
-memory leaks. Since Java has a Garbage Collector (GC) there is
-no need for manual deallocation of memory.
+Java was chosen to avoid dealing with manual memory management
+since the Village War Game needs heap allocations to support
+manual entity lifetime management.
 
 \subsection{User Guide}
 
@@ -234,6 +229,8 @@ village-war-game $ ./run.sh
 
 \subsubsection{Playing}
 
+\subsubsection*{\ul{Number of Human Players}}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=8cm]{./images/human-players-village-war-game.png}
@@ -241,8 +238,7 @@ village-war-game $ ./run.sh
     \label{human-players-village-war-game}
 \end{figure}
 
-Starting the game the player is asked to input the number of
-human players.
+\subsubsection*{\ul{Number of AI Players}}
 
 \begin{figure}[H]
     \centering
@@ -251,45 +247,30 @@ human players.
     \label{ai-players-village-war-game}
 \end{figure}
 
-Then the player is asked to input the number of AI players.
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=12cm]{./images/player-menu-village-war-game.png}
-    \caption{Menu for the human players}
+    \caption{The menu for human players}
     \label{player-menu-village-war-game}
 \end{figure}
 
-The game loop will start. Each human player will be prompted
-with a menu of options. There are two categories: \textbf{Info}
-and \textbf{Actions}.
+Each human player is prompted with a menu of options having two
+categories: \textbf{Info} and \textbf{Actions}.
 
 The \textbf{Info} category contains options which provide the
 player with information about his own village, enemy villages,
-armies and costs. Every option in the \textbf{Info} category is
-self--explanatory.
+armies and costs. Every option is self--explanatory.
 
 The \textbf{Actions} category contains options which affect the
-state of the game such as \textit{building}, \textit{training}
-and \textit{attacking}. Finally, the player can decided to pass
-the turn to the next player.
+state of the game, such as \textit{building}, \textit{upgrading}
+\textit{training} and \textit{attacking}. A player can also
+\textit{pass} the turn to the next player.
 
-All players by default will start with $50$ ``food'', ``metal''
-and ``mana''. The player can use these resources to build
-or upgrade buildings and train troops.
+All players, by default, start with $50$ ``food'', ``metal'' and
+``mana''. The player can use resources or troops to perform the
+above described actions.
 
-The following types of building can be built:
-
-\begin{enumerate}
-    \item Academy (to generate wizards)
-    \item Foundation (to generate scouts)
-    \item Arena (to generate brawlers)
-    \item Farm (to generate food)
-    \item Mine (to generate metal)
-    \item Mana Tower (to generate mana)
-\end{enumerate}
-
-As described in the above list there are three types of troops:
+There are three types of troops:
 
 \begin{enumerate}
     \item Wizard (high attack, low health, medium speed, low
@@ -300,113 +281,120 @@ As described in the above list there are three types of troops:
         carrying capacity)
 \end{enumerate}
 
+And there six types of building:
+
+\begin{enumerate}
+    \item Academy (to generate wizards)
+    \item Foundation (to generate scouts)
+    \item Arena (to generate brawlers)
+    \item Farm (to generate food)
+    \item Mine (to generate metal)
+    \item Mana Tower (to generate mana)
+\end{enumerate}
+
+\textbf{Note:} It is useful to check the amount of resources you
+have using option $1$ prior to performing any action.
+
 \subsubsection*{\ul{Building}}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=12cm]{./images/building-village-war-game.png}
-    \caption{Building an Academy in the player's village}
-    \label{building-village-war-game}
-\end{figure}
+\begin{enumerate}
+    \item Use option $7$ to get a list of all the different
+        buildings and there build cost.
+    \item Pick from option $1$ -- $6$ to build or $7$ to go
+        back.
+    \item You can view your new building by using option $3$.
+\end{enumerate}
 
-As depicted above in figure \ref{building-village-war-game}, the
-player is prompted with the different costs of the different
-buildings. If the player does not have enough resources for
-building he/she is notified.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=12cm]{./images/buildings-info-village-war-game.png}
-    \caption{Info about buildings in the player's village}
-    \label{buildings-info-village-war-game}
-\end{figure}
-
-As shown in figure \ref{buildings-info-village-war-game}, the
-buildings can have different levels of productivity. The initial
-level of productivity for all buildings is $1$.
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=12cm]{./images/building-village-war-game.png}
+%     \caption{Building an Academy in the player's village}
+%     \label{building-village-war-game}
+% \end{figure}
 
 \subsubsection*{\ul{Upgrading}}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=12cm]{./images/upgrading-village-war-game.png}
-    \caption{Upgrading an Academy in the player's village}
-    \label{buildings-info-village-war-game}
-\end{figure}
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=12cm]{./images/upgrading-village-war-game.png}
+%     \caption{Upgrading an Academy in the player's village (to
+%     generate more troops per round)}
+%     \label{buildings-info-village-war-game}
+% \end{figure}
 
-Upgrading the building increases the building's level of
-productivity. This has the effect of generating more resources
-or troops per round.  Similarly, if the player does not have
-enough resources for upgrading he/she is notified. 
+\begin{enumerate}
+    \item Use option $8$ to get a list of all the different
+        buildings and there upgrade cost.
+    \item Pick from option $1$ -- $6$ to upgrade or $7$ to go
+        back.
+    \item You can view your upgraded building by using option $3$.
+\end{enumerate}
 
-Additionally, the building which is upgraded first is the oldest
-building.
+\textbf{Note:} The player does not have granular control over
+which buildings to upgrade. Given the implementation the oldest
+building of the specified type is upgraded first. However,
+buildings which have reached there maximum level cannot be
+upgraded further.
 
 \subsubsection*{\ul{Training}}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=12cm]{./images/training-village-war-game.png}
-    \caption{Training Wizards in the player's village}
-    \label{buildings-info-village-war-game}
-\end{figure}
+\begin{enumerate}
+    \item Use option $9$ to get a list of all the different
+        troops and there training cost.
+    \item Pick from option $1$ -- $3$ to train or $4$ to go
+        back.
+    \item Pick the number of troops to train.
+    \item You can view the contribution of your trained troops
+        by using option $2$.
+\end{enumerate}
 
-Training troops increases the overall stats of the chosen
-troops. Similarly if the player does not have enough resources
-or troops he/she is notified.
-
-Additionally, the training scheme is the same as for buildings
-i.e. the oldest troops are trained first, and each troop has an
-initial level of $1$ and a maximum level of $3$.
+\textbf{Note:} The user does not have granular control over
+which troops to train. Due to the movement of troops, they
+are essentially trained randomly. However, troops which have
+reached there maximum level cannot be trained further.
 
 \subsubsection*{\ul{Attacking}}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=12cm]{./images/attacking-village-war-game.png}
-    \caption{Attacking another village with Wizards in the player's village}
-    \label{attacking-village-war-game}
-\end{figure}
+\begin{enumerate}
+    \item Use option $10$ to get a list of all enemy villages.
+    \item Pick a village, from $1$ -- $n$, to attack.
+    \item Pick the composition of the army i.e. the number of
+        wizards, brawlers and scouts.
+    \item You can view the marching armies by using option $6$.
+\end{enumerate}
 
-To attack another village the player needs to pick a enemy
-village to attack. Then the player must specify the composition
-of the army.
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=12cm]{./images/attacking-village-war-game.png}
+%     \caption{Attacking another village with Wizards in the player's village}
+%     \label{attacking-village-war-game}
+% \end{figure}
 
-Again if the player does not have enough troops he/she is
-notified.
-
-The troops will be moved from the village station into the army.
-This means that the village will have less defensive power
-making it more vulnerable to attack.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=12cm]{./images/armies-info-village-war-game.png}
-    \caption{Viewing an army marching towards an enemy village}
-\end{figure}
-
-Additionally, when the army arrives at it destination the player
-will be notified of whether the attack was successful or
-unsuccessful.
-
-\subsubsection*{\ul{Incorrect Player Input}}
-
-In all instances where the player input is unexpected or
-incorrect, the player is notified. All error messages are
-handled in the \texttt{HumanPlayer} class. 
-
-Moreover, error handling was performed by returning a
-\texttt{Status} enum which contains a number of possible errors
-which the program might encounter.
-
-\textbf{Note:} Exceptions were avoided at all costs as they
-obscure control flow. Moreover, most errors do not arise
-because of exceptional circumstances. Exceptions were handled
-only when thrown from the standard library.
+% - note that troops will be moved from the village station into
+%   the created army
+% - additionally, the player is notified when the army is
+%   defeated
 
 \subsubsection*{\ul{Quitting}}
 
-Any human player can quit by pressing Ctrl-C.
+Any human player can quit by pressing \texttt{Ctrl--C}.
+
+\subsubsection*{\ul{Player Notification}}
+
+In all instances where the player input is unexpected or
+incorrect, the player is notified. All notification messages are
+handled in the \texttt{HumanPlayer} class or using the
+\texttt{Status} enum.
+
+The most common notifications are cause by not having enough
+troops or not having enough resources.
+
+%% TODO: This is for adding to the technical aspect.
+
+% \textbf{Note:} Exceptions were avoided at all costs as they
+% obscure control flow. Moreover, most errors do not arise
+% because of exceptional circumstances. Exceptions were handled
+% only when thrown from the standard library.
 
 \subsection{Design}
 
@@ -416,340 +404,223 @@ Any human player can quit by pressing Ctrl-C.
     \caption{A UML diagram (without members) of the game}
 \end{figure}
 
-\textbf{Note:} The full class diagrams will not be displayed as
-they would consume to many pages.
-
-In terms of design the specification was followed closely.
+\textbf{Note:} The full UML diagram including members is not
+shown as it would take up too much space.
 
 \subsubsection{The Game Class}
 
-The Game class is essentially the entry point to our program.
-The main method will create a new instance of the Game class and
-it will call the \texttt{run()} method to start the game. The
-Game class houses a Map and has two main phases, the setup
-phase and the game loop phase. The setup phase essentially
-creates all the objects and which are required at the start.
+The \texttt{Game} class is the entry point of the game. It
+houses a \texttt{Map} object and has two main phases. the
+\textit{setup} phase and the \textit{game--loop} phase.
 
-\textbf{Note:} The size of the Map varies depending on the
-number of players. Moreover, it tries to spread out all the
-villages evenly on the map to ensure that no villages are to
-close to each other.
+The \textit{setup} phase creates and initialises all the objects
+required at the start.
 
-The game loop phases is essentially, where all the game play
-start and operations which need to occur everything every round
-of the game are done. Also, every round the game tick is
-increased. This allows us to keep track and try to quantify at
-what stage the game is.
+The \textit{game--loop} phase is where all the game play takes
+place. Each iteration of the loop is called a ``round''. The
+total number of rounds is tracked using a singleton
+\texttt{Tick} object.
+
+\textbf{Note:} The size of the map varies depending on the
+number of players and the villages are speard out evenly across
+the map.
 
 \subsubsection{Map \& Village Design}
 
-The Map class will only contain two lists. These are a list of
-villages and a list of armies. This approach instead or actually
-storing everything in a 2D array has a couple of benefits.
-Firstly, this makes dealing with objects a lot easier since
-there is no need to move objects from one location in
-to another in the array. Also, it is easier and more efficient to
-just store the location of the entity directly with the entity.
-This means that getting the location of an entity is fast.
-Moreover, it also means that you can have multiple objects which
-occupy the same location without interfering with each other.
-This is obviously useful since we do not have to worry about
-intersecting armies.
+The \texttt{Map} class contains two lists: a list of villages
+and a list of armies, and each village and army contains a
+\texttt{Point} object to store its own location. This approach,
+instead of using a 2D array has the benefit of allowing multiple
+entities to exist at the same location. This is important since
+marching armies can have intersecting paths. Moreover, it makes
+managing entities significanlty easier.
 
-The Village of each player is essentially the hub where all
-actions are performed. This also unfortunately means that the
-village has to be polluted with a lot of action methods. This is
-only the case due to the limitations present in Java's generics
-and reflection capabilities.
+The village of each player is the hub where all actions are
+performed. This unfortunately means that the village has to be
+polluted with a lot of action methods.
 
-\textbf{Note:} This is ideally circumvented by actually,
-dropping all OOP design and instead using singular entities
-like: Troop and Building, then providing a builder which
-constructs Troops and Buildings with specific statics and
-identifiers remove the need for reflection and generics to deal
-will all types of troops and buildings, whilst retaining the
-possibility of quickly extending the types of troops and
-buildings very easily.
+%% TODO: Move this to technical report.
+
+% \textbf{Note:} This is ideally circumvented by actually,
+% dropping all OOP design and instead using singular entities
+% like: Troop and Building, then providing a builder which
+% constructs Troops and Buildings with specific statics and
+% identifiers remove the need for reflection and generics to deal
+% will all types of troops and buildings, whilst retaining the
+% possibility of quickly extending the types of troops and
+% buildings very easily.
 
 \subsubsection{Player Design}
 
 For the player, there is a main abstract class and two
 subclasses which implement the interface defined in the abstract
-class. The two subclasses are AIPlayer and HumanPlayer. Then
-each Village has a Player field which we can populate with a
-player. Since both types of players have the same interface and
-they can interact with the village in the same way. Also it
-makes swapping between an AI player and human player easy.
+class. The two subclasses are \texttt{AIPlayer} and
+\texttt{HumanPlayer}. Each village has a player and both types
+of players interact with the village using the same methods
+exposed by the \texttt{Village} class. This is because the both
+players have an \texttt{actions()} method which takes in a
+\texttt{Village} object.
 
-\textbf{Note:} A simple reference to the Tick object present in
-the game object is also present in all AI players. This can
-allow for more complicated AI behaviour because it allows for
-the artificial creation of game stages similar to chess for
-example: the opening, mid-game and the end-game.
+\textbf{Note:} A reference to the singleton \texttt{Tick} object
+is present present in all AI players. This allows for more
+complicated AI behaviour because a whole game can be segmented
+into different stages for example: the opening, the mid-game and
+the end-game.
 
 \subsubsection{Resource Design}
 
-In particular in terms implementation since  we need a
-substantial amount of resources to almost anything in the game
-it simply does not make sense to create a Resource class and
-then subclasses of specific types of resources. The issue with
-doing this is that handling the resources would have been very
-difficult. Additionally, it would have required the continuous
-creation of resources which would have definitely taken time
-since allocating memory is an expensive operation. Also as
-objects they would have carried no internal state what so ever
-and only the presence of that type of which add to the
-cumulative sum of resources makes has meaning. Hence, everything
-was design around having one ResourceCollection which holds
-counters of the amount of resources of all the different types.
-
-This substantially improves performance since there is no need
-for a lot of allocations and it means that overall handling
-resources is less cumbersome.
+Since the resources carry no internal state and only the
+quantity of the resources matters there is no need for creating
+actual objects to represent the resources. Hence, everything was
+designed around having a \texttt{ResourceCollection} class which
+holds counters for each type of resource.
 
 \subsubsection{Troop Design}
 
-Again there is a Troop abstract class which which specifies the
-behaviour of all troops and then there are subclasses which
+Again there is a \texttt{Troop} abstract class which specifies
+the behaviour of all troops and then there are subclasses which
 initialize their fields with specific values according to the
-strength and weaknesses each Troop type (as described above in
+strengths and weaknesses each Troop type (as described above in
 the player guide.)
 
 Further more an important data structure built on top of the
-CategoryList is the TroopCollection. This class facilitates the
-grouping of all troops even of different class types into one
-object. This object is able to send and receive troops,
-calculate the total attack power etc.
+\texttt{CategoryList} is the \texttt{TroopCollection}. This
+class facilitates the grouping of all troops even of different
+class types into one object. This object is able to send and
+receive troops, calculate the total attack power etc.
 
+Additionally, two other classes \texttt{Army} and
+\texttt{Station}, compose a \texttt{TroopCollection}
 Additionally, we have to other classes which compose a
-TroopCollection. These are Army and Station. The Army as the
-name implies is able to roam the map whilst the Station is part
-of the village.
-
-The difference between these two is that the Army is able to
-move and exist separately of the village. Additionally, it has a
-lot of extra methods which facilitate combat with a village.
+TroopCollection. Armies are different from stations because they
+are capabale of marching across the map and engaging in combat
+with an enemy village.
 
 \subsubsection{Building Design}
 
-This is the biggest inheritance hierarchy. There is a main
-abstract class called Building and two abstract subclasses which
-are TroopBuilding and ResourceBuilding which differentiate
-between troop generating buildings and resource generating
-buildings. Initially, the reason for the split was done under
-the assumption that the troop buildings require an additional
-method to train troops. However, this was no longer needed later
-on in development. However, changing would have resulted in
-changing quite a few parts of the code to deal with a single
-level of inheritance. So, this system was kept. Since training
-is not actually done by the building but by a method in the
-troop, to follow game specifications a check to ensure that at
-building of the appropriate type exists was put in place.
+There is a main abstract class called \texttt{Building} and two
+abstract subclasses are called \texttt{TroopBuilding} and
+\texttt{ResourceBuilding}. These two subclasses facilitate
+differentiation between troop--generating buildings and
+resource--generating buildings. This split was done under the
+assumption that the troop buildings require an additional method
+to train troops. This was no longer the case later in
+development however, removing two subclasses would have required
+quite a few changes to the code. Consequently, the subclasses
+were kept.
 
-Moreover, the Village class contains two category lists of type
-TroopBuilding and type ResourceBuilding because the CategoryList
-class is not powerful enough provide a mechanism where you can
-group any collection of objects by the respective category even
-if it may be a super class. Also using such a data structure is
-either guaranteed to be slow due to requirement of iteration or
-memory hungry requiring separate list for all the classes in
-the inheritance hierarchy to accommodate searching with any
-possible class in the hierarchy.
+Since training is not actually done by the building but by a
+method in the \texttt{Troop} class, to follow the game
+specification a check was added to ensure that at least one
+building of the appropriate type exists. 
+
+% Moreover, the Village class contains two category lists of type
+% TroopBuilding and type ResourceBuilding because the CategoryList
+% class is not powerful enough provide a mechanism where you can
+% group any collection of objects by the respective category even
+% if it may be a super class. Also using such a data structure is
+% either guaranteed to be slow due to requirement of iteration or
+% memory hungry requiring separate list for all the classes in
+% the inheritance hierarchy to accommodate searching with any
+% possible class in the hierarchy.
 
 
 \subsection{Technical Aspects}
 
-In general, give the above design which is very technical it
-meant that most of the coding was simply routine coding with
-nothing out of the ordinary. The only notable mentions is the
-extensive use of design patterns specifically the builder, the
-singleton and the observer and the CategoryList.
+\subsubsection{Usage of Exceptions}
 
+Exceptions were avoided as they obscure control flow. Most,
+errors do not arise because of exceptional circumstances.
+Exceptions were handled only when thrown from the standard
+library.
 
-\begin{lstlisting}[language=Java, caption={Builder pattern used
-for the ResourceCollection}]
-public static class Builder {
-    private int _food = 0;
-    private int _metal = 0;
-    private int _mana = 0;
-    
-    public ResourceCollection build() {
-        return new ResourceCollection(_food, _metal, _mana);
-    }
-    
-    public Builder setFood(int food) {
-        if (food >= 0) {
-            _food = food;
-        }
-    
-        return this;
-    }
-    
-    public Builder setMetal(int metal) {
-        if (metal >= 0) {
-            _metal = metal;
-        }
-    
-        return this;
-    }
-    
-    public Builder setMana(int mana) {
-        if (mana >= 0) {
-            _mana = mana;
-        }
-    
-        return this;
-    }
-}
-\end{lstlisting}
+\subsubsection{OOP \& \texttt{CategoryList}}
 
-As we can see the above code is implementing the builder
-pattern. This was helpful because it allowed for the easier
-creation of resource collection as sometimes they are also used
-to denote cost for example upgrading a building.
+Using OOP and creating spearate classes for the building and
+troop types added complexity to the code. This is because when
+it comes to generics and reflection Java is quite limited. This
+became an issue, because when trying to genericise the code to
+cater for multiple troop and building types, without needing to
+change the \texttt{Village} class, it proved to very difficult.
 
-\begin{lstlisting}[language=Java, caption={The game Tick class
-is a singleton}]
-public class Tick {
-    private static Tick _instance = null;
+It required the creation of a special data structure named a
+\texttt{CategoryList}. It is similar to a \texttt{HashMap},
+however, the key is the type of the object. This data structure
+facilitates getting a collection of objects by there type,
+iterating over all objects etc. However, it is still limited
+because it is not capable of handling multi--level inheritance
+hierarchies.
 
-    private BigInteger _tick = BigInteger.ZERO;
-    private Tick() {}
+\subsubsection{Singleton Design Pattern}
 
-    public static Tick getInstance() {
-        if (_instance == null) {
-            _instance = new Tick();
-        }
+Some objects such as \texttt{Tick} and \texttt{Map} require only
+one instance for for the whole game. Hence, the singleton
+pattern was used for these objects.
 
-        return _instance;
-    }
+\subsubsection{Observer Design Pattern}
 
-    // ...
-}
-\end{lstlisting}
+When an army is defeated, following the specification, the army
+is also destroyed. This requires that the player is notified of
+the defeat as it is information which can affect the decisions
+the player takes. Hence, the observer pattern is used to notify
+the player of the armies defeat.
 
-Again similarly, this was useful to ensure that one can use the
-Tick object where ever it useful and ensure that there is only
-one instance per game.
-
-\begin{lstlisting}[language=Java, caption={The Player class
-(contains the notify for the observer pattern)}]
-public abstract class Player {
-    private final String _name;
-    public Player(String name) {
-        _name = name;
-    }
-    public String getName() {
-        return _name;
-    }
-    public abstract void actions(Village village);
-    public abstract void notify(String text);
-}
-\end{lstlisting}
-
-\begin{lstlisting}[language=Java, caption={\texttt{notify()}
-being used to notify the player that a army has been defeated in
-Village.java}]
-public Village enemyTroopArrival() {
-    List<Army> clonedArmies = new LinkedList<>(_armies);
-    
-    for (var army : clonedArmies) {
-        if (army.isEnemy(this) && army.arrived()) {
-            if (isDestroyed()) {
-                army.goBack();
-            } else {
-                if (!army.attack().isSuccessful()) {
-                    army.getSender().getPlayer().notify("The below army has been defeated\n" + army);
-                    _armies.remove(army);
-                }
-            }
-        }
-    }
-    
-    return this;
-}
-\end{lstlisting}
-
-The observer pattern is used because it is useful for notifying
-players of events in game. Specifically, it is used when armies
-are defeated or when they arrive back. This helps the player
-gain useful information which he/she wouldn't have since the
-player's village will never actually interact with the defeated
-army again.
+Additionally, to decouple UI from the notification method used
+by the observer, it makes sense to add a message queue.
 
 \subsection{Testing}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=17cm]{./images/invalid-user-input-village-war-game.png}
-    \caption{Demonstrating invalid option (out--of--bounds) and
-    failure to parse repectively}
-\end{figure}
-
-So, there are three types of failures which our application has
+There are three types of failures which our application has
 to cater for:
 
 \begin{enumerate}
-    \item Incorrect input i.e. failure to parse input into
-        correct type.
-    \item Failure due to invalid option or out of bounds e.g.
-        option $12$ does not exist.
+    \item Failure due to inability to parse player input.
+    \item Failure due to invalid or out--of--bounds option.
     \item Failure due to insufficient resources or troops.
 \end{enumerate}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=17cm]{./images/not-enough-resources-village-war-game.png}
-    \caption{Demonstrating ``not enough'' resources failure}
+    \includegraphics[width=10cm]{./images/invalid-user-input-village-war-game.png}
+    \caption{Demonstrating failuer due to invalid option
+    (out--of--bounds) and inability to parse repectively}
 \end{figure}
-
-Each input was manually tested to ensure that it is not possible
-to plunge the game into an invalid where behaviour is not
-properly defined.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=17cm]{./images/testing-army-defeat-village-war-game.png}
-    \caption{Demonstration of a army defeat notification being manually tested}
+    \includegraphics[width=10cm]{./images/not-enough-resources-village-war-game.png}
+    \caption{Demonstrating failure due to insufficient
+    resources}
+\end{figure}
+
+Each input was manually tested to ensure that the above three
+cases are handled properly.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{./images/testing-army-defeat-village-war-game.png}
+    \caption{Demonstration of a army defeat notification}
 \end{figure}
 
 Additionally, the game was further manually tested in a form of
-white-box testing to ensure that the game behaviour is as
-expected.
+white-box testing to ensure that behaviour is as expected.
 
 \subsection{Limitations \& Improvements}
 
-\ul{Limitation:} The user interface is very hard to navigate
-around and not intuitive. Additionally, crucial information for
-the player to play strategically, is hidden behind info options
-which is decision taken to reduce screen clutter.
+\ul{Limitation:} The user interface is very limiting. It is
+limited in the amount of information it can neatly provide to
+the player, it is limited in manuverability etc.
 
-\ul{Solution:} Creating a GUI which the user can use would make
-the overall experience of playing the game better. This is
-because the user interface can be better to provide the user
-with important information quickly and easily accessible
-actions.
+\ul{Solution:} Using a GUI would help provide a better UX since
+a GUI is very flexible.
 
-\ul{Limitation:} Dealing with different object types which all
-have identical features just different values is not ideal. This
-is because it increases complexity due to the restrictions of
-the type checking in a language. To circumvent this issue
-facilities such as generics and reflection are used. However, in
-Java these are not really first-class features with the same
-power as in other languages.
-
-\ul{Solution:} Settling on a simpler entity system where
-inheritance is a avoided as much as possible reduces issues
-related type checking enforced by the compiler and hence there
-is no need for dealing with generics or reflection making the
-overall code significantly simpler.
-
-\ul{Limitation:} The amount of options and choices the user can
-make is limited. This is mainly due to the how clunky the user
-interface it.
+\ul{Limitation:} The amount of control the player has is
+limited. This is mainly due to how clunky the UI is. Giving the
+user more granular control would require more clutter or more
+nesting in submenus. 
 
 \ul{Solution:} Changing to GUI can allow the application to grow
-in terms of complexity
+in terms of complexity without sacrificing UX.
 
 \section{Minesweeper}
 
@@ -805,7 +676,7 @@ minesweeper $ ./run.sh
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=10cm]{./images/playing-minesweeper.png}
+    \includegraphics[width=8cm]{./images/playing-minesweeper.png}
     \caption{Playing Minesweeper}
     \label{playing-minesweeper}
 \end{figure}
@@ -815,26 +686,12 @@ figure \ref{playing-minesweeper}.
 
 \textbf{Note:} \texttt{vim} motions are used to move the cursor.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=10cm]{./images/hitting-mine-minesweeper.png}
-    \caption{Hitting a mine}
-    \label{hitting-mine-minesweeper}
-\end{figure}
-
-If the player hits a mine the above message as in figure
-\ref{hitting-mine-minesweeper} will be displayed.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=10cm]{./images/finishing-minesweeper.png}
-    \caption{Finishing a game of Minesweeper}
-    \label{finishing-minesweeper}
-\end{figure}
+If the player hits a mine the message ``YOU HAVE HIT A MINE!
+(Press r to retry)'' will be displayed. 
 
 If the player manages to clear all the cells without hitting a
-mine the above message as in figure \ref{finishing-minesweeper}
-will be displayed.
+mine the message ``YOU HAVE CLEARED THE BOARD! (Press r to
+retry)'' will be displayed.
 
 Finally, there is an additional \textit{secret} command to
 automatically complete the board without hitting a mine. The
@@ -849,16 +706,8 @@ mine on his first try.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=17cm]{minesweeper-uml/minesweeper-and-board.png}
+    \includegraphics[width=12cm]{minesweeper-uml/minesweeper-and-board.png}
     \caption{Class diagrams of the Minesweeper class and the Board class}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics{minesweeper-uml/cell.png}
-    \includegraphics{minesweeper-uml/relations.png}
-    \caption{A class diagram of the Cell class State enum and a
-    UML diagram (without members) of the game}
 \end{figure}
 
 The Minesweeper class contains the user interface code, that
@@ -867,20 +716,29 @@ also handles user input.
 
 The Board class contains the majority of the game logic. It is a
 part of the Minesweeper class, that is if a Minesweeper object
-ceases to exist so does the Board object. Further more the
-actual board \texttt{m\_board} is a grid of Cell objects. Also
-the lifetime of the objects is managed by the Board since when
-the board ceases to exist so do the cells.
+ceases to exist so does the Board object.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=8cm]{minesweeper-uml/cell.png}
+    \includegraphics[width=12cm]{minesweeper-uml/relations.png}
+    \caption{A class diagram of the Cell class State enum and a
+    UML diagram (without members) of the game}
+\end{figure}
+
+Further more the actual board \texttt{m\_board} is a grid of
+Cell objects. Also the lifetime of the objects is managed by
+the Board since when the board ceases to exist so do the cells.
 
 \subsection{Testing}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=10cm]{./images/unit-tests-minesweeper.png}
+    \includegraphics[width=8cm]{./images/unit-tests-minesweeper.png}
     \caption{Unit tests for Minesweeper (on macOS Ventura 13.1)}
 \end{figure}
 
-Black-box Testing and Unit Testing were used to test the
+White-box Testing and Unit Testing were used to test the
 application. For unit testing \texttt{gtest} is required.
 
 \begin{figure}[H]
