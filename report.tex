@@ -35,6 +35,7 @@ marginparwidth=0pt]{geometry}
 \usepackage{svg}
 \usepackage{tikz}
 \usepackage{subfiles}
+\usepackage{titling}
 
 % MACROS & DEFS
 
@@ -107,6 +108,7 @@ marginparwidth=0pt]{geometry}
 
 % TITLE
 
+\setlength{\droptitle}{-5em}
 \title{CPS2004 --- Object Oriented Programming\\
 \vspace{1em}\textbf{Assignment}}
 
@@ -126,73 +128,26 @@ B.Sc. (Hons)(Melit.) Computing Science and Mathematics (Second Year)}
 \thispagestyle{empty} % Suppress headers and footers on the title page
 
 %----------------------------------
+\begin{center}
+    Task 1: \url{https://github.com/JuanScerriE/village-war-game}
+\end{center}
+\vspace{-2.4em}
+\begin{center}
+    Commit: \texttt{dc94524263a754adab47ef669bf02e96a5cf73b4}
+\end{center}
+\begin{center}
+    Task 2: \url{https://github.com/JuanScerriE/minesweeper}
+\end{center}
+\vspace{-2.4em}
+\begin{center}
+    Commit: \texttt{af94818f4aa1e6e47b59609f8cffc21a66869731}
+\end{center}
 
 \tableofcontents
 
 \listoffigures
 
-\clearpage
-
-\section{Plagiarism Declaration}
-
-Plagiarism is defined as \textit{``the unacknowledged use, as
-one's own, of work of another person, whether or not such work
-has been published, and as may be further elaborated in Faculty
-or University guidelines''} (\ul{University Assessment
-Regulations}, 2009, Regulation 39 (b)(i), University of Malta).
-
-I, the undersigned, declare that the report submitted is my
-work, except where acknowledged and referenced. I understand
-that the penalties for committing a breach of the regulations
-include loss of marks; cancellation of examination results;
-enforced suspension of studies; or expulsion from the degree
-programme.
-
-Work submitted without this signed declaration will not be
-corrected, and will be given zero marks.
-
-\vfill
-
-\begin{minipage}[t]{0.3\textwidth}
-\ul{Juan Scerri} \medskip
-
-\textbf{Student's full name} \medskip
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.3\textwidth}
-\ul{CPS2004} \medskip
-
-\textbf{Study-unit code} \medskip
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.3\textwidth}
-\ul{{\today}} \medskip
-
-\textbf{Date of submission} \medskip
-\end{minipage}
-
-\vspace{2cm}
-
-\textbf{Title of submitted work:} \ul{Object Oriented
-Programming Assignment}
-
-\vspace{2cm}
-
-\textbf{Student's signature} \medskip
-
-\underline{\includegraphics[height=2cm]{./images/sig.png}} \medskip
-
-% Specifically:
-% - explain language choice 
-% - explain the user interface and how to interact with the game
-% - mention the design (with uml) and design choices
-% - important technical aspects which are crucial and
-%   fundamental to the whole program
-% - approach to testing and ensuring proper functionality of the
-%   program
-% - limitations and possible improvements
-
-\clearpage
+% \clearpage
 
 \section{Village War Game}
 
@@ -305,22 +260,7 @@ have using option $1$ prior to performing any action.
     \item You can view your new building by using option $3$.
 \end{enumerate}
 
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=12cm]{./images/building-village-war-game.png}
-%     \caption{Building an Academy in the player's village}
-%     \label{building-village-war-game}
-% \end{figure}
-
 \subsubsection*{\ul{Upgrading}}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=12cm]{./images/upgrading-village-war-game.png}
-%     \caption{Upgrading an Academy in the player's village (to
-%     generate more troops per round)}
-%     \label{buildings-info-village-war-game}
-% \end{figure}
 
 \begin{enumerate}
     \item Use option $8$ to get a list of all the different
@@ -363,18 +303,6 @@ reached there maximum level cannot be trained further.
     \item You can view the marching armies by using option $6$.
 \end{enumerate}
 
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=12cm]{./images/attacking-village-war-game.png}
-%     \caption{Attacking another village with Wizards in the player's village}
-%     \label{attacking-village-war-game}
-% \end{figure}
-
-% - note that troops will be moved from the village station into
-%   the created army
-% - additionally, the player is notified when the army is
-%   defeated
-
 \subsubsection*{\ul{Quitting}}
 
 Any human player can quit by pressing \texttt{Ctrl--C}.
@@ -388,13 +316,6 @@ handled in the \texttt{HumanPlayer} class or using the
 
 The most common notifications are cause by not having enough
 troops or not having enough resources.
-
-%% TODO: This is for adding to the technical aspect.
-
-% \textbf{Note:} Exceptions were avoided at all costs as they
-% obscure control flow. Moreover, most errors do not arise
-% because of exceptional circumstances. Exceptions were handled
-% only when thrown from the standard library.
 
 \subsection{Design}
 
@@ -410,7 +331,7 @@ shown as it would take up too much space.
 \subsubsection{The Game Class}
 
 The \texttt{Game} class is the entry point of the game. It
-houses a \texttt{Map} object and has two main phases. the
+houses a \texttt{Map} object and has two main phases. The
 \textit{setup} phase and the \textit{game--loop} phase.
 
 The \textit{setup} phase creates and initialises all the objects
@@ -422,7 +343,7 @@ total number of rounds is tracked using a singleton
 \texttt{Tick} object.
 
 \textbf{Note:} The size of the map varies depending on the
-number of players and the villages are speard out evenly across
+number of players and the villages are spread out evenly across
 the map.
 
 \subsubsection{Map \& Village Design}
@@ -433,22 +354,11 @@ and a list of armies, and each village and army contains a
 instead of using a 2D array has the benefit of allowing multiple
 entities to exist at the same location. This is important since
 marching armies can have intersecting paths. Moreover, it makes
-managing entities significanlty easier.
+managing entities significantly easier.
 
 The village of each player is the hub where all actions are
 performed. This unfortunately means that the village has to be
 polluted with a lot of action methods.
-
-%% TODO: Move this to technical report.
-
-% \textbf{Note:} This is ideally circumvented by actually,
-% dropping all OOP design and instead using singular entities
-% like: Troop and Building, then providing a builder which
-% constructs Troops and Buildings with specific statics and
-% identifiers remove the need for reflection and generics to deal
-% will all types of troops and buildings, whilst retaining the
-% possibility of quickly extending the types of troops and
-% buildings very easily.
 
 \subsubsection{Player Design}
 
@@ -493,7 +403,7 @@ Additionally, two other classes \texttt{Army} and
 \texttt{Station}, compose a \texttt{TroopCollection}
 Additionally, we have to other classes which compose a
 TroopCollection. Armies are different from stations because they
-are capabale of marching across the map and engaging in combat
+are capable of marching across the map and engaging in combat
 with an enemy village.
 
 \subsubsection{Building Design}
@@ -514,17 +424,6 @@ method in the \texttt{Troop} class, to follow the game
 specification a check was added to ensure that at least one
 building of the appropriate type exists. 
 
-% Moreover, the Village class contains two category lists of type
-% TroopBuilding and type ResourceBuilding because the CategoryList
-% class is not powerful enough provide a mechanism where you can
-% group any collection of objects by the respective category even
-% if it may be a super class. Also using such a data structure is
-% either guaranteed to be slow due to requirement of iteration or
-% memory hungry requiring separate list for all the classes in
-% the inheritance hierarchy to accommodate searching with any
-% possible class in the hierarchy.
-
-
 \subsection{Technical Aspects}
 
 \subsubsection{Usage of Exceptions}
@@ -536,7 +435,7 @@ library.
 
 \subsubsection{OOP \& \texttt{CategoryList}}
 
-Using OOP and creating spearate classes for the building and
+Using OOP and creating separate classes for the building and
 troop types added complexity to the code. This is because when
 it comes to generics and reflection Java is quite limited. This
 became an issue, because when trying to genericise the code to
@@ -582,8 +481,8 @@ to cater for:
 \begin{figure}[H]
     \centering
     \includegraphics[width=10cm]{./images/invalid-user-input-village-war-game.png}
-    \caption{Demonstrating failuer due to invalid option
-    (out--of--bounds) and inability to parse repectively}
+    \caption{Demonstrating failure due to invalid option
+    (out--of--bounds) and inability to parse respectively}
 \end{figure}
 
 \begin{figure}[H]
@@ -609,7 +508,7 @@ white-box testing to ensure that behaviour is as expected.
 
 \ul{Limitation:} The user interface is very limiting. It is
 limited in the amount of information it can neatly provide to
-the player, it is limited in manuverability etc.
+the player, it is limited in maneuverability etc.
 
 \ul{Solution:} Using a GUI would help provide a better UX since
 a GUI is very flexible.
@@ -617,7 +516,7 @@ a GUI is very flexible.
 \ul{Limitation:} The amount of control the player has is
 limited. This is mainly due to how clunky the UI is. Giving the
 user more granular control would require more clutter or more
-nesting in submenus. 
+nesting in sub--menus. 
 
 \ul{Solution:} Changing to GUI can allow the application to grow
 in terms of complexity without sacrificing UX.
@@ -695,7 +594,7 @@ retry)'' will be displayed.
 
 Finally, there is an additional \textit{secret} command to
 automatically complete the board without hitting a mine. The
-user needs to press \texttt{W} (\texttt{shift + w}).
+user needs to press \texttt{W} (\texttt{Shift--W}).
 
 \textbf{Note:} This only works if the user has at least revealed
 one cell. This is because the board is populated with all the
