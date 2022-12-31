@@ -271,9 +271,9 @@ have using option $1$ prior to performing any action.
 \end{enumerate}
 
 \textbf{Note:} The player does not have granular control over
-which buildings to upgrade. Given the implementation the oldest
+which buildings to upgrade. Given the implementation, the oldest
 building of the specified type is upgraded first. However,
-buildings which have reached there maximum level cannot be
+buildings which have reached their maximum level cannot be
 upgraded further.
 
 \subsubsection*{\ul{Training}}
@@ -291,7 +291,7 @@ upgraded further.
 \textbf{Note:} The user does not have granular control over
 which troops to train. Due to the movement of troops, they
 are essentially trained randomly. However, troops which have
-reached there maximum level cannot be trained further.
+reached their maximum level cannot be trained further.
 
 \subsubsection*{\ul{Attacking}}
 
@@ -314,7 +314,7 @@ incorrect, the player is notified. All notification messages are
 handled in the \texttt{HumanPlayer} class or using the
 \texttt{Status} enum.
 
-The most common notifications are cause by not having enough
+The most common notifications are caused by not having enough
 troops or not having enough resources.
 
 \subsection{Design}
@@ -357,7 +357,7 @@ marching armies can have intersecting paths. Moreover, it makes
 managing entities significantly easier.
 
 The village of each player is the hub where all actions are
-performed. This unfortunately means that the village has to be
+performed. Unfortunately this means that the village has to be
 polluted with a lot of action methods.
 
 \subsubsection{Player Design}
@@ -367,15 +367,15 @@ subclasses which implement the interface defined in the abstract
 class. The two subclasses are \texttt{AIPlayer} and
 \texttt{HumanPlayer}. Each village has a player and both types
 of players interact with the village using the same methods
-exposed by the \texttt{Village} class. This is because the both
+exposed by the \texttt{Village} class. This is because both
 players have an \texttt{actions()} method which takes in a
 \texttt{Village} object.
 
 \textbf{Note:} A reference to the singleton \texttt{Tick} object
-is present present in all AI players. This allows for more
-complicated AI behaviour because a whole game can be segmented
-into different stages for example: the opening, the mid-game and
-the end-game.
+is present in all AI players. This allows for more complicated
+AI behaviour because a whole game can be segmented into
+different stages for example: the opening, the mid-game and the
+end-game.
 
 \subsubsection{Resource Design}
 
@@ -399,12 +399,11 @@ class facilitates the grouping of all troops even of different
 class types into one object. This object is able to send and
 receive troops, calculate the total attack power etc.
 
-Additionally, two other classes \texttt{Army} and
-\texttt{Station}, compose a \texttt{TroopCollection}
-Additionally, we have to other classes which compose a
-TroopCollection. Armies are different from stations because they
-are capable of marching across the map and engaging in combat
-with an enemy village.
+Additionally, \texttt{Army} and \texttt{Station} are tow other
+classes which compose a \texttt{TroopCollection}. Armies are
+different from stations because they are capable of marching
+across the map and engaging in combat with an enemy village.
+This is reflected in the additional methods and fields required.
 
 \subsubsection{Building Design}
 
@@ -415,20 +414,20 @@ differentiation between troop--generating buildings and
 resource--generating buildings. This split was done under the
 assumption that the troop buildings require an additional method
 to train troops. This was no longer the case later in
-development however, removing two subclasses would have required
+development. Removing two subclasses would have required
 quite a few changes to the code. Consequently, the subclasses
 were kept.
 
 Since training is not actually done by the building but by a
 method in the \texttt{Troop} class, to follow the game
-specification a check was added to ensure that at least one
+specification, a check was added to ensure that at least one
 building of the appropriate type exists. 
 
 \subsection{Technical Aspects}
 
 \subsubsection{Usage of Exceptions}
 
-Exceptions were avoided as they obscure control flow. Most,
+Exceptions were avoided as they obscure control flow. Most
 errors do not arise because of exceptional circumstances.
 Exceptions were handled only when thrown from the standard
 library.
@@ -440,12 +439,12 @@ troop types added complexity to the code. This is because when
 it comes to generics and reflection Java is quite limited. This
 became an issue, because when trying to genericise the code to
 cater for multiple troop and building types, without needing to
-change the \texttt{Village} class, it proved to very difficult.
+change the \texttt{Village} class, it proved to be very difficult.
 
 It required the creation of a special data structure named a
 \texttt{CategoryList}. It is similar to a \texttt{HashMap},
 however, the key is the type of the object. This data structure
-facilitates getting a collection of objects by there type,
+facilitates: getting a collection of objects by there type,
 iterating over all objects etc. However, it is still limited
 because it is not capable of handling multi--level inheritance
 hierarchies.
@@ -513,7 +512,7 @@ the player, it is limited in maneuverability etc.
 \ul{Solution:} Using a GUI would help provide a better UX since
 a GUI is very flexible.
 
-\ul{Limitation:} The amount of control the player has is
+\ul{Limitation:} The amount of control the player has, is
 limited. This is mainly due to how clunky the UI is. Giving the
 user more granular control would require more clutter or more
 nesting in sub--menus. 
@@ -625,9 +624,9 @@ ceases to exist so does the Board object.
     UML diagram (without members) of the game}
 \end{figure}
 
-Further more the actual board \texttt{m\_board} is a grid of
-Cell objects. Also the lifetime of the objects is managed by
-the Board since when the board ceases to exist so do the cells.
+Furthermore, the actual board \texttt{m\_board} is a grid of
+Cell objects. Also, the lifetime of the objects is managed by
+the Board as when the board ceases to exist so do the cells.
 
 \subsection{Testing}
 
@@ -646,10 +645,10 @@ application. For unit testing \texttt{gtest} is required.
     \caption{Testing for memory leaks (on macOS Ventura 13.1)}
 \end{figure}
 
-Furthermore, to test for memory leaks, on macOS, \texttt{leaks}
-was used and, on Linux, \texttt{valgrind} was used.
-\texttt{leaks} reported not memory leaks whilst
-\texttt{valgrind} reported leaks from \texttt{ncurses}.
+Furthermore, to test for memory leaks, \texttt{leaks} was used
+on macOS and \texttt{valgrind} was used on Linux. \texttt{leaks}
+reported no memory leaks whilst \texttt{valgrind} reported
+leaks from \texttt{ncurses}.
 
 \subsection{Limitations \& Improvements}
 
@@ -662,7 +661,7 @@ different platforms.
 guarantees the same result across different platforms.
 
 \ul{Limitation:} The \texttt{ncurses} library leaks memory on
-Linux whilst on macOS it does not.
+Linux whilst it does not not macOS.
 
 \ul{Solution:} This seems to be intended behaviour from
 \texttt{ncurses}. Read the man page at
