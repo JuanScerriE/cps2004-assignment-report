@@ -399,24 +399,23 @@ class facilitates the grouping of all troops even of different
 class types into one object. This object is able to send and
 receive troops, calculate the total attack power etc.
 
-Additionally, \texttt{Army} and \texttt{Station} are tow other
+Additionally, \texttt{Army} and \texttt{Station} are two other
 classes which compose a \texttt{TroopCollection}. Armies are
 different from stations because they are capable of marching
 across the map and engaging in combat with an enemy village.
-This is reflected in the additional methods and fields required.
+This is reflected in the additional methods and required fields.
 
 \subsubsection{Building Design}
 
 There is a main abstract class called \texttt{Building} and two
-abstract subclasses are called \texttt{TroopBuilding} and
-\texttt{ResourceBuilding}. These two subclasses facilitate
-differentiation between troop--generating buildings and
+abstract subclasses called \texttt{TroopBuilding} and
+\texttt{ResourceBuilding}. These two subclasses facilitate the
+differentiation of troop--generating buildings and
 resource--generating buildings. This split was done under the
 assumption that the troop buildings require an additional method
 to train troops. This was no longer the case later in
-development. Removing two subclasses would have required
-quite a few changes to the code. Consequently, the subclasses
-were kept.
+development. Removing two subclasses would have required quite a
+few changes to the code. Consequently, the subclasses were kept.
 
 Since training is not actually done by the building but by a
 method in the \texttt{Troop} class, to follow the game
@@ -452,19 +451,22 @@ hierarchies.
 \subsubsection{Singleton Design Pattern}
 
 Some objects such as \texttt{Tick} and \texttt{Map} require only
-one instance for for the whole game. Hence, the singleton
-pattern was used for these objects.
+one instance for the whole game. Hence, the singleton pattern
+was used for these objects.
 
 \subsubsection{Observer Design Pattern}
 
 When an army is defeated, following the specification, the army
-is also destroyed. This requires that the player is notified of
-the defeat as it is information which can affect the decisions
-the player takes. Hence, the observer pattern is used to notify
-the player of the armies defeat.
+is also destroyed. This requires that the player is notified
+about the defeat as it is information which can affect the
+decisions the player takes. Hence, the observer pattern is used
+to notify the player about the armies defeat.
 
-Additionally, to decouple UI from the notification method used
-by the observer, it makes sense to add a message queue.
+To handle this properly a message queue was added to the
+\texttt{HumanPlayer} class to keep track of all the
+notifications. Then at every turn all received notifications
+will be printed. This ensures that notifications do not clutter
+the UI.
 
 \subsection{Testing}
 
@@ -472,8 +474,8 @@ There are three types of failures which our application has
 to cater for:
 
 \begin{enumerate}
-    \item Failure due to inability to parse player input.
-    \item Failure due to invalid or out--of--bounds option.
+    \item Failure due to the inability to parse player input.
+    \item Failure due to invalid or out--of--bounds input.
     \item Failure due to insufficient resources or troops.
 \end{enumerate}
 
@@ -481,7 +483,7 @@ to cater for:
     \centering
     \includegraphics[width=10cm]{./images/invalid-user-input-village-war-game.png}
     \caption{Demonstrating failure due to invalid option
-    (out--of--bounds) and inability to parse respectively}
+    (out--of--bounds) and the inability to parse respectively}
 \end{figure}
 
 \begin{figure}[H]
@@ -636,7 +638,7 @@ the Board as when the board ceases to exist so do the cells.
     \caption{Unit tests for Minesweeper (on macOS Ventura 13.1)}
 \end{figure}
 
-White-box Testing and Unit Testing were used to test the
+White--box Testing and Unit Testing were used to test the
 application. For unit testing \texttt{gtest} is required.
 
 \begin{figure}[H]
@@ -661,7 +663,7 @@ different platforms.
 guarantees the same result across different platforms.
 
 \ul{Limitation:} The \texttt{ncurses} library leaks memory on
-Linux whilst it does not not macOS.
+Linux whilst it does not on macOS.
 
 \ul{Solution:} This seems to be intended behaviour from
 \texttt{ncurses}. Read the man page at
