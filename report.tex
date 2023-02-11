@@ -153,9 +153,10 @@ B.Sc. (Hons)(Melit.) Computing Science and Mathematics (Second Year)}
 
 \subsection{Language Choice}
 
-Java was chosen to avoid dealing with manual memory management
-since the Village War Game needs heap allocations to support
-manual entity lifetime management.
+Java was chosen to avoid dealing with manual memory management.
+This is important because the Village War Game needs many heap
+allocation to support the complex entity lifetimes described in
+the specification.
 
 \subsection{User Guide}
 
@@ -204,7 +205,7 @@ village-war-game $ ./run.sh
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=12cm]{./images/player-menu-village-war-game.png}
+    \includegraphics[width=10cm]{./images/player-menu-village-war-game.png}
     \caption{The menu for human players}
     \label{player-menu-village-war-game}
 \end{figure}
@@ -213,13 +214,14 @@ Each human player is prompted with a menu of options having two
 categories: \textbf{Info} and \textbf{Actions}.
 
 The \textbf{Info} category contains options which provide the
-player with information about his own village, enemy villages,
-armies and costs. Every option is self--explanatory.
+player with information. These provide information about the
+player's own village, enemy villages, armies and costs. Every
+option is self--explanatory.
 
 The \textbf{Actions} category contains options which affect the
-state of the game, such as \textit{building}, \textit{upgrading}
-\textit{training} and \textit{attacking}. A player can also
-\textit{pass} the turn to the next player.
+state of the game, such as \textit{building},
+\textit{upgrading}, \textit{training} and \textit{attacking}. A
+player can also \textit{pass} the turn to the next player.
 
 All players, by default, start with $50$ ``food'', ``metal'' and
 ``mana''. The player can use resources or troops to perform the
@@ -390,32 +392,33 @@ holds counters for each type of resource.
 Again there is a \texttt{Troop} abstract class which specifies
 the behaviour of all troops and then there are subclasses which
 initialize their fields with specific values according to the
-strengths and weaknesses each Troop type (as described above in
-the player guide.)
+strengths and weaknesses for each Troop type (as described above
+in the player guide.)
 
-Further more an important data structure built on top of the
+Furthermore, a data structure built on top of
 \texttt{CategoryList} is the \texttt{TroopCollection}. This
-class facilitates the grouping of all troops even of different
-class types into one object. This object is able to send and
-receive troops, calculate the total attack power etc.
+class facilitates the grouping of all troops, even of different
+class types, into a single object. This object is able to send
+and receive troops, calculate the total attack power etc.
 
 Additionally, \texttt{Army} and \texttt{Station} are two other
 classes which compose a \texttt{TroopCollection}. Armies are
 different from stations because they are capable of marching
 across the map and engaging in combat with an enemy village.
-This is reflected in the additional methods and required fields.
+This is reflected by the additional methods and fields.
 
 \subsubsection{Building Design}
 
 There is a main abstract class called \texttt{Building} and two
 abstract subclasses called \texttt{TroopBuilding} and
 \texttt{ResourceBuilding}. These two subclasses facilitate the
-differentiation of troop--generating buildings and
+differentiation of troop--generating buildings, and
 resource--generating buildings. This split was done under the
 assumption that the troop buildings require an additional method
 to train troops. This was no longer the case later in
-development. Removing two subclasses would have required quite a
-few changes to the code. Consequently, the subclasses were kept.
+development. Removing the two subclasses would have required
+quite a few changes to the code. Consequently, the subclasses
+were kept.
 
 Since training is not actually done by the building but by a
 method in the \texttt{Troop} class, to follow the game
@@ -437,10 +440,11 @@ Using OOP and creating separate classes for the building and
 troop types added complexity to the code. This is because when
 it comes to generics and reflection Java is quite limited. This
 became an issue, because when trying to genericise the code to
-cater for multiple troop and building types, without needing to
-change the \texttt{Village} class, it proved to be very difficult.
+cater for multiple troop, and building types, without needing to
+change the \texttt{Village} class, it proved to be very
+difficult.
 
-It required the creation of a special data structure named a
+It required the creation of a special data structure named
 \texttt{CategoryList}. It is similar to a \texttt{HashMap},
 however, the key is the type of the object. This data structure
 facilitates: getting a collection of objects by there type,
@@ -463,10 +467,10 @@ decisions the player takes. Hence, the observer pattern is used
 to notify the player about the armies defeat.
 
 To handle this properly a message queue was added to the
-\texttt{HumanPlayer} class to keep track of all the
-notifications. Then at every turn all received notifications
-will be printed. This ensures that notifications do not clutter
-the UI.
+\texttt{HumanPlayer} class to keep track of all notifications.
+Then at every turn all received notifications will be printed.
+This ensures that notifications are always correctly associated
+with their respective recipient.
 
 \subsection{Testing}
 
@@ -503,24 +507,22 @@ cases are handled properly.
 \end{figure}
 
 Additionally, the game was further manually tested in a form of
-white-box testing to ensure that behaviour is as expected.
+White--box testing to ensure that behaviour is as expected.
 
 \subsection{Limitations \& Improvements}
 
-\ul{Limitation:} The user interface is very limiting. It is
-limited in the amount of information it can neatly provide to
-the player, it is limited in maneuverability etc.
+\ul{Limitation:} The user interface is limited in the amount of
+information it can neatly provide to the player, making it
+clunky.
 
 \ul{Solution:} Using a GUI would help provide a better UX since
 a GUI is very flexible.
 
-\ul{Limitation:} The amount of control the player has, is
-limited. This is mainly due to how clunky the UI is. Giving the
-user more granular control would require more clutter or more
-nesting in sub--menus. 
+\ul{Limitation:} The amount of control the player has, is also
+limited and giving the user more granular control would require
+more clutter or more nesting in sub--menus. 
 
-\ul{Solution:} Changing to GUI can allow the application to grow
-in terms of complexity without sacrificing UX.
+\ul{Solution:} Same as the previous limitation.
 
 \section{Minesweeper}
 
@@ -529,9 +531,7 @@ in terms of complexity without sacrificing UX.
 \cpp{} was chosen for Minesweeper because it has a fixed board
 size of $16 \times 16$. This means that it is possible to stack
 allocate every object removing the need for dynamic memory
-allocation. This is facilitated by \texttt{std::array} from the
-Standard Template Library (STL) which allows for the creation of
-fixed size arrays on the stack.
+allocation.
 
 \subsection{User Guide}
 
@@ -600,7 +600,7 @@ user needs to press \texttt{W} (\texttt{Shift--W}).
 \textbf{Note:} This only works if the user has at least revealed
 one cell. This is because the board is populated with all the
 mines after the first reveal to ensure a player never hits a
-mine on his first try.
+mine on his first reveal.
 
 \subsection{Design}
 
@@ -610,9 +610,9 @@ mine on his first try.
     \caption{Class diagrams of the Minesweeper class and the Board class}
 \end{figure}
 
-The Minesweeper class contains the user interface code, that
-is it contains all \texttt{ncurses} specific code. The class
-also handles user input.
+The Minesweeper class contains the user interface code, i.e. it
+contains all \texttt{ncurses} specific code along with user
+input.
 
 The Board class contains the majority of the game logic. It is a
 part of the Minesweeper class, that is if a Minesweeper object
@@ -639,7 +639,7 @@ the Board as when the board ceases to exist so do the cells.
 \end{figure}
 
 White--box Testing and Unit Testing were used to test the
-application. For unit testing \texttt{gtest} is required.
+application.
 
 \begin{figure}[H]
     \centering
@@ -655,7 +655,7 @@ leaks from \texttt{ncurses}.
 \subsection{Limitations \& Improvements}
 
 \ul{Limitation:} The unit tests are not cross-platform; four of
-the unit tests fail on Linux. This is mostly due to differing
+the unit tests fail on Linux. This is due to differing
 implementations of \texttt{srand()} and \texttt{rand()} on
 different platforms.
 
@@ -665,7 +665,7 @@ guarantees the same result across different platforms.
 \ul{Limitation:} The \texttt{ncurses} library leaks memory on
 Linux whilst it does not on macOS.
 
-\ul{Solution:} This seems to be intended behaviour from
+\ul{Solution:} This seems to be intended behaviour for
 \texttt{ncurses}. Read the man page at
 \url{https://man7.org/linux/man-pages/man3/curs_memleaks.3x.html}
 
